@@ -1,11 +1,25 @@
-# Lucky Rara Gallery
+# Lucky Rara Website — YouTube Embed Fixed
 
-Project structure:
-- `index.html` — HTML markup
-- `css/style.css` — CSS
-- `js/script.js` — JavaScript
-- `images/` — image assets
+This version fixes YouTube embedded-player Error 153 by explicitly preserving the HTTP Referer and passing the live site origin to each YouTube iframe. It keeps the three Shorts and three featured videos already configured.
 
-Instagram: https://www.instagram.com/theluckyrarashow
+## Deploy on Netlify
+Upload the contents of this project folder (the folder containing `index.html`, `css/`, and `js/`) or upload the ZIP and extract it before deploying.
 
-The booking form is prepared for a webhook/backend. Set `BOOKING_WEBHOOK_URL` in `js/script.js` after connecting a supported server/automation workflow. A static HTML page cannot directly deliver a private Instagram DM to the account owner.
+
+## Local testing
+
+Do **not** open `index.html` directly with `file://` if you want YouTube embeds to play. YouTube requires an HTTP `Referer` for embedded playback; a `file://` page normally has no HTTP Referer, which causes Error 153.
+
+From this project folder run:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open:
+
+```text
+http://localhost:8000
+```
+
+On a normal HTTP/HTTPS page, the website sends the recommended `strict-origin-when-cross-origin` referrer policy and YouTube origin parameter.
